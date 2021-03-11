@@ -112,9 +112,16 @@ def eval():
             
         t1 = time.time()
         print("==> Processing: %s || Timer: %.4f sec." % (str(count), (t1 - t0)))
-        save_img(prediction.cpu().data, str(count), True)
-        save_img(target, str(count), False)
         
+		def pad(k:int):
+		  k_string = '00000' + str(k)
+		  return k_string[-5:]
+
+        padded_count = pad(count)
+        save_img(prediction.cpu().data, padded_count, True)
+        if not(upscale_only):
+          save_img(target, padded_count + '_target', False)
+
         prediction = prediction.cpu()
         prediction = prediction.data[0].numpy().astype(np.float32)
         prediction = prediction*255.
