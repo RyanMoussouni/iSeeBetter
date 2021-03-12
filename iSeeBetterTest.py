@@ -113,9 +113,9 @@ def eval():
         t1 = time.time()
         print("==> Processing: %s || Timer: %.4f sec." % (str(count), (t1 - t0)))
         
-		def pad(k:int):
-		  k_string = '00000' + str(k)
-		  return k_string[-5:]
+        def pad(k:int):
+            k_string = '00000' + str(k)
+            return k_string[-5:]
 
         padded_count = pad(count)
         save_img(prediction.cpu().data, padded_count, True)
